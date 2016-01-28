@@ -1,0 +1,30 @@
+diff -c -r old/config-static.sh new/config-static.sh
+*** old/config-static.sh	2016-01-26 17:52:37.444554150 +1100
+--- new/config-static.sh	2016-01-26 17:53:35.114371845 +1100
+***************
+*** 1,11 ****
+  # ARCH will be auto-detected as the host if not specified
+  #ARCH=i486
+! CC_BASE_PREFIX=/opt/cross
+! MAKEFLAGS=-j8
+  
+! GCC_BOOTSTRAP_CONFFLAGS=--disable-lto-plugin
+! GCC_CONFFLAGS=--disable-lto-plugin
+! MUSL_CC_PREFIX="musl-"
+  # Disable these three lines when running build-gcc-deps.sh
+! CC="'"${MUSL_CC_PREFIX}gcc"' -Wl,-Bstatic -static-libgcc"
+! CXX="'"${MUSL_CC_PREFIX}g++"' -Wl,-Bstatic -static-libgcc"
+--- 1,13 ----
+  # ARCH will be auto-detected as the host if not specified
+  #ARCH=i486
+! CC_BASE_PREFIX=/Software/Core/C-compiler
+! MAKEFLAGS=-j3
+  
+! GCC_BOOTSTRAP_CONFFLAGS="--disable-lto-plugin $pathOptions"
+! GCC_CONFFLAGS="--disable-lto-plugin $pathOptions"
+! BINUTILS_CONFFLAGS="$pathOptions"
+! MUSL_CONFFLAGS="--syslibdir=/Software/Core/C-compiler/Libraries $pathOptions"
+! MUSL_CC_PREFIX="$crossTarget"
+  # Disable these three lines when running build-gcc-deps.sh
+! CC="$MUSL_CC_PREFIX-gcc -Wl,-Bstatic -static-libgcc -I/Software/Core/C-compiler/Headers -L/Software/Core/C-compiler/Libraries"
+! CXX="$MUSL_CC_PREFIX-g++ -Wl,-Bstatic -static-libgcc -I/Software/Core/C-compiler/Headers -L/Software/Core/C-compiler/Libraries"

@@ -1,0 +1,13 @@
+# device	mountpoint	  type		options		bkup	fsck
+# ------	----------	  ----		-------		----	----
+ /dev/sda	/		  ext4		defaults	0	1
+
+ proc		/Shell/proc	  proc		defaults	0	0
+ sysfs		/Shell/sys	  sysfs		defaults	0	0
+ devtmpfs	/Shell/dev	  devtmpfs	defaults	0	0
+ devpts		/Shell/dev/pts	  devpts	defaults	0	0
+
+ /Apps		/Shell/Apps	  none		bind		0	0
+ /Documents	/Shell/Documents  none		bind		0	0
+ /Software	/Shell/Software	  none		bind		0	0
+ /System	/Shell/System	  none		bind		0	0

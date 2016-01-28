@@ -1,0 +1,36 @@
+#!/Software/Core/Command-line/bash --login
+
+# Load system control directories (dev, proc, sys)
+mount --all
+
+# Remount root disk as writable
+mount / --no-mtab -o remount,rw
+
+# Load modules
+export MODPROBE_OPTIONS="-d /Shell"
+modprobe -a \
+	`hwdetect --show-modules-order --kernel_directory=/Shell \
+		| sed 's/MODULES ORDER: //'`
+
+# Start services
+/System/Services &
+
+# Start shell
+bash --login
+
+# Stop all processes
+killall --regexp ".*"
+sleep 5
+
+# Check root disk again
+umount /
+fsck -a -T / # Automatically repair, don't show title.
+
+# Unmount everything
+umount --all
+
+# Remount root read-only, so we can still shut down
+mount / --no-mtab -o remount,ro
+
+# Power off
+exec /System/Shutdown

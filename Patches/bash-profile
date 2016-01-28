@@ -1,0 +1,29 @@
+# System settings
+
+## Paths for executables
+
+findPaths() {
+	PATH=/Software/Core/Command-line
+	NEWPATH=
+	NEWPATH=$NEWPATH:`find /Apps/* -maxdepth 0 -type d -printf "%p:"`
+	NEWPATH=$NEWPATH:`find /Software/Core/* -maxdepth 0 -type d -printf "%p:"`
+	NEWPATH=$NEWPATH:`find /Software/Extras/* -maxdepth 0 -type d -printf "%p:"`
+	export PATH=$NEWPATH
+	
+	LD_LIBRARY_PATH=
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`find /Apps/*/Libraries -maxdepth 0 -type d -printf "%p:"`
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`find /Software/Core/*/Libraries -maxdepth 0 -type d -printf "%p:"`
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`find /Software/Extras/*/Libraries -maxdepth 0 -type d -printf "%p:"`
+	export LD_LIBRARY_PATH
+}
+findPaths
+
+
+## Colourise "ls"
+
+alias ls="ls --color=auto"
+
+
+## Show current working directory in prompt
+
+PS1="\w> "

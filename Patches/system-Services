@@ -1,0 +1,4 @@
+#!/Software/Core/Command-line/bash
+
+ifconfig eth0 up
+dhcpd
